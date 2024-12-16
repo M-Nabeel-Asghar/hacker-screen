@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Simulator</title>
+    <style>
+        /* Body and Background */
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: black;
+            color: #00ff00;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        /* Screen container */
+        #hackerScreen {
+            width: 80%;
+            height: 80%;
+            background: black;
+            color: #00ff00;
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.4;
+            overflow-y: auto;
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        /* Blinking Cursor */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            background-color: #00ff00;
+            margin-left: 2px;
+            animation: blink 0.6s infinite;
+        }
+
+        /* Cursor blink animation */
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            50.1%, 100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="hackerScreen">Initializing...</div>
+
+<script>
+    // Random lines of code-like text to display
+    const codeLines = [
+        "Connecting to server...",
+        "Establishing secure connection...",
+        "Accessing encrypted files...",
+        "Running brute force attack...",
+        "Decrypting passwords...",
+        "Loading databases...",
+        "Fetching confidential data...",
+        "Injecting payload...",
+        "Scanning for vulnerabilities...",
+        "Access granted.",
+        "File transfer in progress...",
+        "Uploading malware...",
+        "Data extraction complete.",
+        "Remote access enabled."
+    ];
+
+    // Screen element and cursor initialization
+    const screen = document.getElementById("hackerScreen");
+
+    // Function to simulate typing effect
+    function typeLine(line, callback) {
+        let index = 0;
+        const interval = setInterval(() => {
+            screen.innerHTML += line[index];
+            index++;
+            if (index === line.length) {
+                clearInterval(interval);
+                screen.innerHTML += "<br>";
+                callback();
+            }
+        }, 50);  // typing speed
+    }
+
+    // Function to display random lines with a delay
+    function displayRandomLines() {
+        if (codeLines.length === 0) return;
+
+        const line = codeLines[Math.floor(Math.random() * codeLines.length)];
+        typeLine(line, () => {
+            setTimeout(displayRandomLines, Math.random() * 500 + 500);
+        });
+    }
+
+    // Start the simulation
+    displayRandomLines();
+</script>
+
+</body>
+</html>
